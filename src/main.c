@@ -6,7 +6,15 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/27 13:36:16 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/09/27 18:34:25 by dabel-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "cub3d.h"
+int main(int argc, char **argv)
+{
+	char **aux;
+	aux = get_map_info(argv);
+	//
+		
+	return (0);
+}
