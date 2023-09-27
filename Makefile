@@ -6,7 +6,7 @@
 #    By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 14:41:48 by ialvarez          #+#    #+#              #
-#    Updated: 2023/09/26 19:12:01 by ialvarez         ###   ########.fr        #
+#    Updated: 2023/09/27 13:53:03 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,21 +15,10 @@ CC = gcc
 RM = rm -f
 MAKE = make
 DEBUG = -g3 -fsanitize=address
-CFLAGS = -g3 -Wall -Werror -Wextra $(KEYCODES_CFLAGS)
+CFLAGS = -g3 -Wall -Werror -Wextra
 
 # Properties for compiling in MacOS
 MLX_LINK = -lmlx -framework OpenGL -framework AppKit
-ESC = KEY_ESC=53
-W = KEY_W=13
-A = KEY_A=0
-S = KEY_S=1
-D = KEY_D=2
-UP = KEY_UP=126
-DOWN = KEY_DOWN=125
-LEFT = KEY_LEFT=123
-RIGHT = KEY_RIGHT=124
-
-KEYCODES_CFLAGS = -D $(ESC) -D $(W) -D $(A) -D $(S) -D $(D) -D $(UP) -D $(DOWN) -D $(LEFT) -D $(RIGHT)
 
 # COLORS #
 GREEN = \033[0;32m
