@@ -6,7 +6,7 @@
 #    By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 14:41:48 by ialvarez          #+#    #+#              #
-#    Updated: 2023/09/27 13:53:03 by ialvarez         ###   ########.fr        #
+#    Updated: 2023/09/28 18:41:09 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 RM = rm -f
 MAKE = make
 DEBUG = -g3 -fsanitize=address
-CFLAGS = -g3 -Wall -Werror -Wextra
+CFLAGS = -D BUFFER_SIZE=1000 -g3 -fsanitize=address #-Wall -Werror -Wextra
 
 # Properties for compiling in MacOS
 MLX_LINK = -lmlx -framework OpenGL -framework AppKit
@@ -28,7 +28,7 @@ MAGENTA = \033[0;35m
 NO_COLOR = \033[0m
 
 # SOURCES & OBJECTS #
-SRCS =	
+SRCS =	src/main.c src/parse_map.c src/get_map_info.c src/get_next_line.c src/get_next_line_utils.c 
 
 OBJS = $(SRCS:.c=.o)
 

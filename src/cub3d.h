@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/28 16:48:12 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:43:09 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_info
 	t_rgb	ceiling;
 	char **map;
 }		t_info;
+
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 #endif
