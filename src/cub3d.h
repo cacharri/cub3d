@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/27 18:34:04 by dabel-co         ###   ########.fr       */
+/*   Updated: 2023/09/28 13:22:28 by dabel-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,23 @@
 # include <fcntl.h>
 # include <math.h>
 
+typedef struct s_rbg
+{
+	int r;
+	int g;
+	int b;
+}		t_rgb;
+
 typedef struct s_info
 {
 	char *n;
 	char *s;
 	char *w;
 	char *e;
-	char *floor;
-	char *ceiling;
+	t_rgb	floor;
+	t_rgb	ceiling;
 	char **map;
 }		t_info;
-
+t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 #endif
