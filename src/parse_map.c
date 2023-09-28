@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialvarez <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dabel-co <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/13 17:43:52 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/27 17:24:28 by dabel-co         ###   ########.fr       */
+/*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
+/*   Updated: 2023/09/28 13:22:26 by dabel-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strdup(const char *s1)
+t_info	add_paths(char **map)
 {
-	char	*dst;
-	int		i;
+	int i;
 
-	i = ft_strlen(s1);
-	dst = malloc(sizeof (char) * (i + 1));
-	if (!dst)
-		return (NULL);
-	ft_memcpy(dst, s1, i);
-	dst[i] = '\0';
-	return (dst);
+
+}
+t_info	parse_map(char	**map)
+{
+	t_info	aux;
+
+	aux = add_paths(map);	
 }
