@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   strinit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2022/08/05 16:48:05 by vifernan          #+#    #+#             */
+/*   Updated: 2022/12/23 06:28:38 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strinit(char *str, char x)
 {
-	int	i;
+	int		i;
+	char	*aux;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (str[++i] != '\0')
 	{
-		i++;
+		if (str[i] == x)
+			break ;
 	}
-	return (i);
+	aux = malloc(sizeof(char *) * i + 1);
+	i = -1;
+	while (str[++i] != '\0')
+	{
+		aux[i] = str[i];
+		if (str[i] == x)
+			break ;
+	}
+	aux[i] = '\0';
+	return (aux);
 }

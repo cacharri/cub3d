@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/09/28 18:50:36 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:55:10 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*copy_line(char *line)
 		i++;
 	}
 	aux[i] = '\0';
-	free(line); // freesear
+	free(line);
 	return (aux);
 	
 }
@@ -35,7 +35,6 @@ char	**extract_input(char **info, int size, int i, char *line)
 	int fd;
 	char	**map;
 	fd = open(info[1], O_RDONLY);
-	//map = malloc(sizeof(char *) * size + 8); //what the fuck es esto
 	if (fd < 0)
 	{
 		printf("error\n");
@@ -54,14 +53,8 @@ char	**extract_input(char **info, int size, int i, char *line)
 		else
 			map[i] = NULL;
 		i++;
-		//get_next_line(fd, &line);
-		//printf("size of the line is%d\n", ft_strlen(line));
-		//printf("%s\n", line); //debug
-		//map[i] = copy_line(line);
-		//i++;
 	}
 	map[i] = NULL;
-	//start debug
 	return (map);
 }
 char	**get_map_info(char **info)
@@ -82,11 +75,11 @@ char	**get_map_info(char **info)
 		size++;
 		free(line);
 	}
-	printf("size is %d\n", size); //debug
+	printf("size is %d\n", size);
 	close(fd);
 	if (size == 0)
 	{
-		printf("empty map\n"); //add exit thingy
+		printf("empty map\n");
 		return (NULL);
 	}
 	fd = open(info[1], O_RDONLY);

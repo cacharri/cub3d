@@ -6,7 +6,7 @@
 #    By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 14:41:48 by ialvarez          #+#    #+#              #
-#    Updated: 2023/09/28 18:41:09 by ialvarez         ###   ########.fr        #
+#    Updated: 2023/09/29 16:29:11 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = gcc
 RM = rm -f
 MAKE = make
 DEBUG = -g3 -fsanitize=address
-CFLAGS = -D BUFFER_SIZE=1000 -g3 -fsanitize=address #-Wall -Werror -Wextra
+CFLAGS = -D BUFFER_SIZE=1000 -Wall -Werror -Wextra
 
 # Properties for compiling in MacOS
 MLX_LINK = -lmlx -framework OpenGL -framework AppKit
@@ -36,7 +36,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -s all -C libft
+	@$(MAKE) -s -C libft
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LINK) libft/libft.a -o $(NAME)
 	@echo "$(GREY) Cub3d compiled $(GREEN) ✔✔ $(NO_COLOR)"
 

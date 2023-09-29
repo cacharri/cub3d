@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_matrix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2022/07/26 19:40:44 by vifernan          #+#    #+#             */
+/*   Updated: 2023/02/23 18:50:41 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	i = -1;
+	while (matrix[++i] != NULL)
+		free(matrix[i]);
+	free(matrix);
 }

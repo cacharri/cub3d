@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strinkey.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2023/02/13 19:00:28 by vifernan          #+#    #+#             */
+/*   Updated: 2023/02/14 20:02:06 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strinkey(const char *str, const char *key)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	i = -1;
+	if (key == NULL || str == NULL)
+		return (-1);
+	while (str[++i] != '\0')
 	{
-		i++;
+		j = -1;
+		while (key[++j] != '\0')
+		{
+			if (str[i] == key[j])
+				return (i);
+		}
 	}
-	return (i);
+	return (-1);
 }

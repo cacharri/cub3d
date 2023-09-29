@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2022/07/13 16:13:59 by vifernan          #+#    #+#             */
+/*   Updated: 2022/08/23 18:05:58 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_charjoin(char c)
 {
-	int	i;
+	char	*str;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	str = malloc(sizeof(char) * 2);
+	if (!str)
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }

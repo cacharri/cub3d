@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/28 18:43:09 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:31:59 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <fcntl.h>
 # include <math.h>
 
+# define VALID " 01NSEO"
+# define POSITION "NSEO"
+# define CLOSE " 1"
 typedef struct s_rbg
 {
 	int r;

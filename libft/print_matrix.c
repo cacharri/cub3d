@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   print_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2022/08/18 19:37:25 by ialvarez          #+#    #+#             */
+/*   Updated: 2023/02/14 20:01:48 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	print_matrix(char **matrix)
 {
-	int	i;
+	int		i;
+	int		j;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	i = -1;
+	while (matrix[++i] != NULL)
 	{
-		i++;
+		j = -1;
+		while (matrix[i][++j] != '\0')
+			write(1, &matrix[i][j], 1);
+		write(1, "\n", 1);
 	}
-	return (i);
 }

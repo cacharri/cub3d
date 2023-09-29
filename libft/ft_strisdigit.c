@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strisdigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: talentum <talentum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2023/03/05 20:06:54 by talentum          #+#    #+#             */
+/*   Updated: 2023/03/05 21:01:10 by talentum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strisdigit(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	i = -1;
+	while (str[++i] != '\0')
 	{
-		i++;
+		if (str[i] < 48 || str[i] > 57)
+			return (0);
 	}
-	return (i);
+	return (1);
 }

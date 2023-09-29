@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_charindex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 18:55:55 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/02/14 20:02:01 by ialvarez         ###   ########.fr       */
+/*   Created: 2022/12/23 06:29:41 by ialvarez          #+#    #+#             */
+/*   Updated: 2023/02/14 20:02:36 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_charindex(char *str, char c)
 {
 	int	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	i = -1;
+	if (!str || c == '\0')
+		return (-1);
+	while (str[++i] != '\0')
 	{
-		i++;
+		if (str[i] == c)
+			return (i);
 	}
-	return (i);
+	return (-1);
 }
