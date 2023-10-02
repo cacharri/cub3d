@@ -6,7 +6,7 @@
 #    By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 14:41:48 by ialvarez          #+#    #+#              #
-#    Updated: 2023/09/29 22:42:43 by ialvarez         ###   ########.fr        #
+#    Updated: 2023/10/02 20:51:50 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,7 @@ CC = gcc
 RM = rm -f
 MAKE = make
 DEBUG = -g3 -fsanitize=address
-CFLAGS = -D BUFFER_SIZE=100 -Wall -Werror -Wextra
-
+CFLAGS = -D BUFFER_SIZE=100 -Wall -Werror -Wextra -g3 -fsanitize=address
 # Properties for compiling in MacOS
 MLX_LINK = -lmlx -framework OpenGL -framework AppKit
 

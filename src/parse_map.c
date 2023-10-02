@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/09/29 22:44:29 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/02 21:46:05 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,19 @@ int		find_end_map(char **map)
 {
 	int	i;
 
-	i = -1;
-	while(map && map[i] != NULL)
-		i++;
-	i--;
+	i = 0;
+	if (map)
+	{
+		while(map && map[i] != NULL)
+			i++;
+		i--;
+	}
 	while(map && map[i])
 	{
 		if (ft_strchr(map[i], '1'))
 			break ;
 		i--;
 	}
-	i++;
 	return (i);
 }
 
@@ -91,7 +93,7 @@ int		find_width_map(char **map, int start, int end)
 
 	i = 0;
 	max = 0;
-	while (map && map[start] && start != end)
+	while (map && map[start] && start != end + 1)
 	{
 		max = ft_strlen(map[start]);
 		if (max > i)
@@ -108,38 +110,34 @@ char **fill_map(char **map, int init, int end, int width)
 	
 	i = init;
 	filled_map = NULL;
-	filled_map = (char **)malloc(sizeof(char *) * (end - init + 1));
-	ft_memset(filled_map, '0', ((end - init) + 1) * sizeof(char *));
+	filled_map = (char **)malloc(sizeof(char *) * ((end - init) + 1));
+	ft_memset(filled_map, 32, (size_t)(end - init));
     if (!filled_map)
         return (NULL);
-    while (i < end)
+    while (i <= end)
 	{
-        filled_map[i - init] = (char *)malloc(sizeof(char ) *(width + 1));
-		ft_memset(filled_map[i - init], '0', (width + 1) * sizeof(char));
+        filled_map[i - init] = (char *)malloc(sizeof(char ) * (width + 1));
+		ft_memset(filled_map[i - init], 32, (size_t)(width));
         if (!filled_map[i - init]) 
 		{
             j = -1;
-            while (++j < i - init)
+            while (++j < end - init)
                 free(filled_map[j]);
             free(filled_map);
             return (NULL);
         }
 		j = -1;
-	//	printf("wid->%d\n", width);
-		while (++j < width)
+		while (++j <= width)
 		{
-			printf("i->%d j->%d init->%d\n", i, j, init);
-            if (map[i][j] != '\0')
+            if (map && map[i][j])
 				filled_map[i - init][j] = map[i][j];
 			else
-			    filled_map[i - init][j] = 32;
-		//	printf("linea->%c  | ", filled_map[i - init][j]);
+				break ;
         }
-        filled_map[i - init][j] = '\0';
-		//printf("fila->%s  | ", filled_map[i - init]);
+        filled_map[i - init][width] = '\0';
 		i++;
     }
-    filled_map[end - init] = NULL;
+    filled_map[(end - init)] = NULL;
     return (filled_map);
 }
 
@@ -174,10 +172,6 @@ t_info	add_paths(char **map, t_info *aux)
 	end = find_end_map(map);
 	width = find_width_map(map, init, end);
 	aux->map = fill_map(map, init, end, width);
-//	printf("esto es el inicio del mapa->%d\n", init);
-//	printf("esto es el final del mapa->%d\n", end);
-//	printf("esto es el width del mapa->%d\n", width);
-	print_matrix(aux->map);
 	return (*aux);
 }
 t_info	parse_map(char	**map)
@@ -192,15 +186,16 @@ t_info	parse_map(char	**map)
     ft_memset(&aux.floor, 0, sizeof(t_rgb));
     ft_memset(&aux.ceiling, 0, sizeof(t_rgb));
 	aux = add_paths(map, &aux);
-//	printf("norte %s\n", aux.n);
-//	printf("sur %s\n", aux.s);
-//	printf("este %s\n", aux.e);
-//	printf("oeste %s\n", aux.w);
-//	printf("floor r%d\n", aux.floor.r);
-//	printf("floor g%d\n", aux.floor.g);
-//	printf("floor b%d\n", aux.floor.b);
-//	printf("cei r%d\n", aux.ceiling.r);
-//	printf("cei g%d\n", aux.ceiling.g);
-//	printf("cei b%d\n", aux.ceiling.b);
+	printf("norte %s\n", aux.n);
+	printf("sur %s\n", aux.s);
+	printf("este %s\n", aux.e);
+	printf("oeste %s\n", aux.w);
+	printf("floor r%d\n", aux.floor.r);
+	printf("floor g%d\n", aux.floor.g);
+	printf("floor b%d\n", aux.floor.b);
+	printf("cei r%d\n", aux.ceiling.r);
+	printf("cei g%d\n", aux.ceiling.g);
+	printf("cei b%d\n", aux.ceiling.b);
+	print_matrix(aux.map);
 	return (aux);
 }
