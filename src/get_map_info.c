@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/02 21:02:29 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:00:34 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ char	**extract_input(char **info, int size, int i, char *line)
 {
 	int fd;
 	char	**map;
+	char	*line_copy;
 	
+	line_copy = NULL;
 	fd = 0;
 	map = NULL;
 	fd = open(info[1], O_RDONLY);
@@ -39,7 +41,9 @@ char	**extract_input(char **info, int size, int i, char *line)
 		i++;
 		line = NULL;
 	}
-	map[i] = NULL;
+	map[i] = ft_strdup(line);
+	free(line);
+	map[i + 1] = NULL;
 	close(fd);
 	return (map);
 }
@@ -73,11 +77,11 @@ char	**get_map_info(char **info)
 	}
 	map = extract_input(info, size, 0, line); 
 	free(line); 
-	while (map && map[i])
+	/*while (map && map[i])							para imprimir el mapa completo
 	{
 		printf("%s\n", map[i]);
 		i++;
 	}
-	printf("\n");
+	printf("\n");*/
 	return(map);
 }

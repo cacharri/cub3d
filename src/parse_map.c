@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/02 21:46:05 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/03 18:33:55 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ void	parse_rgb(char *map, t_rgb *color)
 
 	i = -1;
 	ft_memset(color, '0', sizeof(t_rgb));
+	printf("parse->%s\n", map);
+	while(map && *map)
+	{
+		if (ft_isdigit(*map))
+		{
+			perror("Only numbers allowed in RGB");
+		//	free(map);										Habría que liberar si no son validos los parámetros
+			exit(1);	
+		}
+		map++;
+	}
 	color->r = ft_atoi(ft_strtrok(map, ',', &i));
 	color->g = ft_atoi(ft_strtrok(map, ',', &i));
 	color->b = ft_atoi(&map[(i + 1)]);
@@ -83,6 +94,7 @@ int		find_end_map(char **map)
 			break ;
 		i--;
 	}
+	i++;
 	return (i);
 }
 
@@ -111,17 +123,17 @@ char **fill_map(char **map, int init, int end, int width)
 	i = init;
 	filled_map = NULL;
 	filled_map = (char **)malloc(sizeof(char *) * ((end - init) + 1));
-	ft_memset(filled_map, 32, (size_t)(end - init));
+	ft_memset(filled_map, 32, (size_t)(end - init) + 1);
     if (!filled_map)
         return (NULL);
-    while (i <= end)
+    while (i < end)
 	{
         filled_map[i - init] = (char *)malloc(sizeof(char ) * (width + 1));
-		ft_memset(filled_map[i - init], 32, (size_t)(width));
+		ft_memset(filled_map[i - init], 32, (size_t)(width + 1));
         if (!filled_map[i - init]) 
 		{
             j = -1;
-            while (++j < end - init)
+            while (++j <= end - init)
                 free(filled_map[j]);
             free(filled_map);
             return (NULL);
@@ -171,7 +183,8 @@ t_info	add_paths(char **map, t_info *aux)
 	init = find_start_map(map);
 	end = find_end_map(map);
 	width = find_width_map(map, init, end);
-	aux->map = fill_map(map, init, end, width);
+	//printf("init->%d\nend->%d\nwidth%d\n", init, end, width);
+	aux->map = fill_map(map, init, end , width);
 	return (*aux);
 }
 t_info	parse_map(char	**map)
@@ -196,6 +209,7 @@ t_info	parse_map(char	**map)
 	printf("cei r%d\n", aux.ceiling.r);
 	printf("cei g%d\n", aux.ceiling.g);
 	printf("cei b%d\n", aux.ceiling.b);
+	//printf("matrix:");
 	print_matrix(aux.map);
 	return (aux);
 }
