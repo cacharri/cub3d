@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/03 18:33:55 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/04 19:45:52 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,6 @@ void	parse_rgb(char *map, t_rgb *color)
 
 	i = -1;
 	ft_memset(color, '0', sizeof(t_rgb));
-	printf("parse->%s\n", map);
-	while(map && *map)
-	{
-		if (ft_isdigit(*map))
-		{
-			perror("Only numbers allowed in RGB");
-		//	free(map);										Habría que liberar si no son validos los parámetros
-			exit(1);	
-		}
-		map++;
-	}
 	color->r = ft_atoi(ft_strtrok(map, ',', &i));
 	color->g = ft_atoi(ft_strtrok(map, ',', &i));
 	color->b = ft_atoi(&map[(i + 1)]);
@@ -199,17 +188,17 @@ t_info	parse_map(char	**map)
     ft_memset(&aux.floor, 0, sizeof(t_rgb));
     ft_memset(&aux.ceiling, 0, sizeof(t_rgb));
 	aux = add_paths(map, &aux);
-	printf("norte %s\n", aux.n);
-	printf("sur %s\n", aux.s);
-	printf("este %s\n", aux.e);
-	printf("oeste %s\n", aux.w);
-	printf("floor r%d\n", aux.floor.r);
-	printf("floor g%d\n", aux.floor.g);
-	printf("floor b%d\n", aux.floor.b);
-	printf("cei r%d\n", aux.ceiling.r);
-	printf("cei g%d\n", aux.ceiling.g);
-	printf("cei b%d\n", aux.ceiling.b);
+	//printf("norte %s\n", aux.n);
+	//printf("sur %s\n", aux.s);
+	//printf("este %s\n", aux.e);
+//	printf("oeste %s\n", aux.w);
+//	printf("floor r%d\n", aux.floor.r);
+//	printf("floor g%d\n", aux.floor.g);
+//	printf("floor b%d\n", aux.floor.b);
+//	printf("cei r%d\n", aux.ceiling.r);
+//	printf("cei g%d\n", aux.ceiling.g);
+//	printf("cei b%d\n", aux.ceiling.b);
 	//printf("matrix:");
-	print_matrix(aux.map);
+//	print_matrix(aux.map);
 	return (aux);
 }
