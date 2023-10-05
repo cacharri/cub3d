@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/05 17:30:33 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/05 18:14:29 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ void free_map(char **map, int size)
     free(map);
 }
 
-void	check_one(char *map, int ini, int end, int i)	// checkea entre filas para ver que sean correctas
+void	check_one(char *map, int ini, int end)	// checkea entre filas para ver que sean correctas
 {
-	if (i == 0)		// esta condicion no es necesaria
-		return ;
 	while (map[ini] && ini <= end) 
 	{
 		if (map[ini] == ' ')
@@ -107,7 +105,7 @@ void	check_map(char **map)
 			else if (flag != 0)
 			{
 				check_sides(map[i], ini, end);
-				check_one(map[i - 1], ini, end, i);
+				check_one(map[i - 1], ini, end);
 				flag = 0;
 			}
 			j++;
