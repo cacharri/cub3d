@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/29 22:40:11 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:06:21 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,6 @@ typedef struct s_info
 
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
+int		find_end_map(char **map);
+
 #endif

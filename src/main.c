@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/04 22:28:42 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:30:33 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,22 @@ void free_map(char **map, int size)
     free(map);
 }
 
-void	check_one(char **map, int ini, int end, int i)  //// este es para las filas de arriba y abajo
+void	check_one(char *map, int ini, int end, int i)	// checkea entre filas para ver que sean correctas
 {
-	int check;
-	int bits;
-	
-	bits = end - ini;
-	check = 0;
-	while (map && map[i])
+	if (i == 0)		// esta condicion no es necesaria
+		return ;
+	while (map[ini] && ini <= end) 
 	{
-		while (map[i][ini] && ini <= end) 
+		if (map[ini] == ' ')
 		{
-			if (map[i][ini] == '0')
-			{
-				perror("BAD NEIGHBORHOOD");
-				exit(1);
-			}
-			ini++;
+			perror("BAD NEIGHBORHOOD");
+			exit(1);
 		}
-		
+		ini++;
 	}
 }
 
-void	check_sides(char *map, int ini, int end)
+void	check_sides(char *map, int ini, int end)		// checkea las filas para ver que haya numeros correctos
 {
 	if (map[ini - 1] && ft_strchr("NSEW", map[ini -1]))
 	{
@@ -81,24 +74,22 @@ void	check_map(char **map)
 	int flag = 0;
 	int	cord = 0;
 
+	bef = find_end_map(map) - 1;
 	while(map && map[i])
 	{
-		bef = i;
 		j = 0;
 		while(map[i][j] != '\0')
 		{
 			if (ft_strchr("NSEW", map[i][j]))
-			{
 				cord++;
-			}
 			if (!ft_strchr("01NSEW ", map[i][j]))
 			{
 				perror("CHARACTERS OF THE MAP NOT VALIDS");
 				exit(1);
 			}
-			else if (i == 0 && ft_strchr("0NSWE", map[i][j]))
+			else if ((i == 0 || i == bef) && ft_strchr("0NSWE", map[i][j]))
 			{
-				perror("MAP NOT CLOSED IN THE SUPERIOR BORDDER");
+				perror("MAP IS NOT CLOSED");
 				exit(1);
 			}
 			else if (map[i][j] == '0' && i != 0)
@@ -116,6 +107,7 @@ void	check_map(char **map)
 			else if (flag != 0)
 			{
 				check_sides(map[i], ini, end);
+				check_one(map[i - 1], ini, end, i);
 				flag = 0;
 			}
 			j++;
@@ -124,7 +116,7 @@ void	check_map(char **map)
 	}
 	if (cord != 1)
 	{
-		perror("MAP NOT CLOSED IN THE SUPERIOR BORDDER");
+		perror("TOO MANY COORDINATES");
 		exit(1);
 	}
 		
