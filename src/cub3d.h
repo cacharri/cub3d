@@ -13,9 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "get_next_line.h"
 # include "../libft/libft.h"
-# include "key.h"
 # include <mlx.h>
 # include <stdio.h>
 # include <sys/types.h>
@@ -25,6 +23,16 @@
 # define VALID " 01NSEO"
 # define POSITION "NSEO"
 # define CLOSE " 1"
+
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_ESC 53
 
 typedef struct s_rbg
 {
@@ -58,5 +66,6 @@ typedef struct s_game
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 int		find_end_map(char **map);
+void	check_map(char **map);
 
 #endif

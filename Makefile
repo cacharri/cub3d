@@ -27,7 +27,7 @@ MAGENTA = \033[0;35m
 NO_COLOR = \033[0m
 
 # SOURCES & OBJECTS #
-SRCS =	src/main.c src/parse_map.c src/get_map_info.c src/get_next_line.c src/get_next_line_utils.c 
+SRCS =	src/main.c src/parse_map.c src/get_map_info.c
 
 OBJS = $(SRCS:.c=.o)
 
