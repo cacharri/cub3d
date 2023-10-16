@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/05 17:06:21 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:00:12 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,32 @@
 
 typedef struct s_rbg
 {
-	int r;
-	int g;
-	int b;
-}		t_rgb;
+	int		r;
+	int		g;
+	int		b;
+}				t_rgb;
 
 typedef struct s_info
 {
-	char *n;
-	char *s;
-	char *w;
-	char *e;
+	char	*n;
+	char	*s;
+	char	*w;
+	char	*e;
 	t_rgb	floor;
 	t_rgb	ceiling;
-	char **map;
-}		t_info;
+	char	**map;
+}				t_info;
+
+typedef struct s_game
+{
+	void	*ptr;
+	void	*win;
+	int		x_size;
+	int		y_size;
+	float	wall_h;
+	
+}				t_game;
+
 
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);

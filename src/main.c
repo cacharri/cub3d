@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/05 18:14:29 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:05:01 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	check_map(char **map)
 				check_one(map[i - 1], ini, end);
 				flag = 0;
 			}
-			j++;
+		j++;
 		}
 		i++;
 	}
