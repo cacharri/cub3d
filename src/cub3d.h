@@ -6,16 +6,14 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/17 19:16:40 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:33:15 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "get_next_line.h"
 # include "../libft/libft.h"
-# include "key.h"
 # include <mlx.h>
 # include <stdio.h>
 # include <sys/types.h>
@@ -33,6 +31,16 @@
 # define DEGREES_W 3.14159
 # define DEGREES_S 4.71239
 # define DEGREES_360 6.28319
+
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_ESC 53
 
 typedef struct s_rbg
 {
@@ -66,7 +74,8 @@ typedef struct s_game
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 int		find_end_map(char **map);
+void	check_map(char **map);
 void    init_cub(t_game *init);
-int	check_extension(char *argv, char *ext);
+int		check_extension(char *argv, char *ext);
 
 #endif

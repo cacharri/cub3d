@@ -6,23 +6,12 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/17 20:05:35 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:33:41 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void free_map(char **map, int size)
-{
-	int	i;
-
-	i = -1;
-    while (++i < size)
-	{
-        free(map[i]);
-    }
-    free(map);
-}
 
 void	check_one(char *map, int ini, int end)	// checkea entre filas para ver que sean correctas
 {
