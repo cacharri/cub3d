@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/16 17:05:01 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:05:35 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,15 @@ void	check_sides(char *map, int ini, int end)		// checkea las filas para ver que
 	}
 }
 
-void	check_map(char **map)
+void	check_map(char **map, int i, int j, int cord)
 {
-	int i = 0;
-	int j= 0;
-	int bef = 0;
-	int ini = 0;
-	int end = 0;
-	int flag = 0;
-	int	cord = 0;
+	int ini;
+	int end;
+	int flag;
 
-	bef = find_end_map(map) - 1;
+	ini = 0;
+	end = 0;
+	flag = 0;
 	while(map && map[i])
 	{
 		j = 0;
@@ -85,7 +83,7 @@ void	check_map(char **map)
 				perror("CHARACTERS OF THE MAP NOT VALIDS");
 				exit(1);
 			}
-			else if ((i == 0 || i == bef) && ft_strchr("0NSWE", map[i][j]))
+			else if ((i == 0 || i == find_end_map(map) - 1) && ft_strchr("0NSWE", map[i][j]))
 			{
 				perror("MAP IS NOT CLOSED");
 				exit(1);
@@ -108,7 +106,7 @@ void	check_map(char **map)
 				check_one(map[i - 1], ini, end);
 				flag = 0;
 			}
-		j++;
+			j++;
 		}
 		i++;
 	}
@@ -117,21 +115,40 @@ void	check_map(char **map)
 		perror("TOO MANY COORDINATES");
 		exit(1);
 	}
-		
+}
+
+int	check_extension(char *argv, char *ext)
+{
+	int		len;
+	char	*aux;
+
+	len = ft_strlen(argv);
+	aux = ft_substr(argv, len - 4, len);
+	if (ft_strcmp(aux, ext))
+	{
+		printf("Error %s extension\n", ext);
+		free(aux);
+		return (1);
+	}
+	free(aux);
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
 	t_info	map_data;
+	t_game	init;
 	
-	if (argc != 2)
+	if (argc != 2 || check_extension(argv[1], ".cub") == 1)
 	{
     	printf("Usage: %s <map_file.cub>\n", argv[0]);
    		return (1);
 	}
 	ft_bzero(&map_data, sizeof(t_info));
+	ft_bzero(&init, sizeof(t_game));
 	map_data = parse_map(get_map_info(argv)); //add .cub check,add argc == 2,  try break it
-	check_map(map_data.map);
+	check_map(map_data.map, 0, 0, 0);
 	
+	//init_cub(&init);
 	return (0);
 }

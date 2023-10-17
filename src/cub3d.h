@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/16 17:00:12 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:16:40 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@
 # define VALID " 01NSEO"
 # define POSITION "NSEO"
 # define CLOSE " 1"
+# define WIDTH 1080
+# define HEIGHT 720
+
+# define DEGREES_E 0
+# define DEGREES_N 1.5708
+# define DEGREES_W 3.14159
+# define DEGREES_S 4.71239
+# define DEGREES_360 6.28319
 
 typedef struct s_rbg
 {
@@ -58,5 +66,7 @@ typedef struct s_game
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 int		find_end_map(char **map);
+void    init_cub(t_game *init);
+int	check_extension(char *argv, char *ext);
 
 #endif

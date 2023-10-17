@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/03 17:00:34 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:27:17 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ char	**get_map_info(char **info)
 		return (NULL);
 	}
 	map = extract_input(info, size, 0, line); 
-	free(line); 
-	/*while (map && map[i])							para imprimir el mapa completo
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	printf("\n");*/
+	free(line);
 	return(map);
 }
