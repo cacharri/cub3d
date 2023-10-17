@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/17 16:27:17 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:37:12 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,15 @@ void	check_sides(char *map, int ini, int end)		// checkea las filas para ver que
 	}
 }
 
-void	check_map(char **map)
+void	check_map(char **map, int i, int j, int cord)
 {
-	int i = 0;
-	int j= 0;
-	int bef = 0;
-	int ini = 0;
-	int end = 0;
-	int flag = 0;
-	int	cord = 0;
+	int ini;
+	int end;
+	int flag;
 
-	bef = find_end_map(map) - 1;
+	ini = 0;
+	end = 0;
+	flag = 0;
 	while(map && map[i])
 	{
 		j = 0;
@@ -73,7 +71,7 @@ void	check_map(char **map)
 				perror("CHARACTERS OF THE MAP NOT VALIDS");
 				exit(1);
 			}
-			else if ((i == 0 || i == bef) && ft_strchr("0NSWE", map[i][j]))
+			else if ((i == 0 || i == find_end_map(map) - 1) && ft_strchr("0NSWE", map[i][j]))
 			{
 				perror("MAP IS NOT CLOSED");
 				exit(1);
@@ -96,7 +94,7 @@ void	check_map(char **map)
 				check_one(map[i - 1], ini, end);
 				flag = 0;
 			}
-		j++;
+			j++;
 		}
 		i++;
 	}
@@ -105,7 +103,6 @@ void	check_map(char **map)
 		perror("TOO MANY COORDINATES");
 		exit(1);
 	}
-		
 }
 
 char	**extract_input(char **info, int size, int i, char *line)

@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/17 20:33:15 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:36:31 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_game
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);
 int		find_end_map(char **map);
-void	check_map(char **map);
+void	check_map(char **map, int i, int j, int cord);
 void    init_cub(t_game *init);
 int		check_extension(char *argv, char *ext);
 
