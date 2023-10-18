@@ -14,6 +14,8 @@
 
 void    init_cub(t_game *init)
 {
+
     init->ptr = mlx_init();
     init->win = mlx_new_window(init->ptr, WIDTH, HEIGHT, "cub3d");
+    mlx_loop(init->ptr);
 }

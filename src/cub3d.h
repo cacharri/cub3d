@@ -66,10 +66,9 @@ typedef struct s_game
 	void	*win;
 	int		x_size;
 	int		y_size;
-	float	wall_h;
+	//float	wall_h;
 	
 }				t_game;
-
 
 t_info	parse_map(char **map);
 char	**get_map_info(char **info);

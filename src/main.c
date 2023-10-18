@@ -39,11 +39,11 @@ int main(int argc, char **argv)
     	printf("Usage: %s <map_file.cub>\n", argv[0]);
    		return (1);
 	}
-	ft_bzero(&map_data, sizeof(t_info));
-	ft_bzero(&init, sizeof(t_game));
+	//ft_bzero(&map_data, sizeof(t_info)); why
+	//ft_bzero(&init, sizeof(t_game)); why
 	map_data = parse_map(get_map_info(argv)); //add .cub check,add argc == 2,  try break it
 	check_map(map_data.map, 0, 0, 0);
 	
-	//init_cub(&init);
+	init_cub(&init);
 	return (0);
 }
