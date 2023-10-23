@@ -6,7 +6,7 @@
 #    By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/26 14:41:48 by ialvarez          #+#    #+#              #
-#    Updated: 2023/10/17 20:33:48 by ialvarez         ###   ########.fr        #
+#    Updated: 2023/10/18 17:07:52 by ialvarez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ MAGENTA = \033[0;35m
 NO_COLOR = \033[0m
 
 # SOURCES & OBJECTS #
-SRCS =	src/main.c src/parse_map.c src/get_map_info.c src/cube.c
+SRCS =	src/main.c src/parse_map.c src/get_map_info.c src/cube.c src/fill_parse.c
 
 OBJS = $(SRCS:.c=.o)
 

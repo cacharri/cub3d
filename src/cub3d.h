@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/17 20:36:31 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:17:05 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,17 @@ typedef struct s_game
 	int		x_size;
 	int		y_size;
 	//float	wall_h;
-	
 }				t_game;
 
 t_info	parse_map(char **map);
-char	**get_map_info(char **info);
-int		find_end_map(char **map);
+char	**get_map_info(char **info, int size);
 void	check_map(char **map, int i, int j, int cord);
-void    init_cub(t_game *init);
+void	init_cub(t_game *init);
 int		check_extension(char *argv, char *ext);
+int		find_start_map(char **map);
+int		find_end_map(char **map);
+int		find_width_map(char **map, int start, int end);
+int		fill_aux(char **filled_map, int i, char **map, int width);
+char	**fill_map(char **map, int init, int end, int width);
 
 #endif

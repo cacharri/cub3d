@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/17 20:29:27 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:31:16 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,37 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 	return (aux);
 }
 
+int is_valid_rgb(const char *str) 
+{
+    int commas = 0;
+	int i;
+
+	i = 0;
+	commas = 0;
+    while (str[++i] != '\0')
+	{
+        if (str[i] == ',')
+		{
+            commas++;
+            if (commas > 2)
+                return 0;
+        }
+		else if (!ft_isdigit(str[i]) && str[i] != '\t' && str[i] != 32)
+            return 0;
+	}
+    return (commas == 2);
+}
+
 void	parse_rgb(char *map, t_rgb *color)
 {
 	int		i;
 
 	i = -1;
+	if (!is_valid_rgb(map))
+	{
+        printf("Error: El formato RGB en la línea no es válido.\n");
+        exit(1);
+    }
 	ft_memset(color, '0', sizeof(t_rgb));
 	color->r = ft_atoi(ft_strtrok(map, ',', &i));
 	color->g = ft_atoi(ft_strtrok(map, ',', &i));
@@ -51,107 +77,6 @@ void	parse_rgb(char *map, t_rgb *color)
 		printf("Colors of RGB are not valid\n");
 		exit(1);
 	}
-}
-
-int	find_start_map(char **map)
-{
-	int		i;
-
-	i = -1;
-	while (map && map[++i] != NULL)
-	{
-		if (!ft_strchr("NSEWFC", map[i][0]) && ft_strchr(map[i], '1'))
-			break ;
-	}
-	return (i);
-}
-
-int	find_end_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (map)
-	{
-		while (map && map[i] != NULL)
-			i++;
-		i--;
-	}
-	while (map && map[i])
-	{
-		if (ft_strchr(map[i], '1'))
-			break ;
-		i--;
-	}
-	i++;
-	return (i);
-}
-
-int	find_width_map(char **map, int start, int end)
-{
-	int	i;
-	int	max;
-
-	i = 0;
-	max = 0;
-	while (map && map[start] && start != end + 1)
-	{
-		max = ft_strlen(map[start]);
-		if (max > i)
-			i = max;
-		start++;
-	}
-	return (i);
-}
-
-int	fill_aux(char **filled_map, int i, char **map, int width)
-{
-	int	j;
-	int	init;
-	int	end;
-
-	init = find_start_map(map);
-	end = find_end_map(map);
-	if (!filled_map[i - init])
-	{
-		j = -1;
-		while (++j <= end - init)
-			free(filled_map[j]);
-		free(filled_map);
-		exit (0);
-	}
-	j = -1;
-	while (++j <= width)
-	{
-		if (map && map[i][j])
-			filled_map[i - init][j] = map[i][j];
-		else
-			return (1);
-	}
-	return (0);
-}
-
-char	**fill_map(char **map, int init, int end, int width)
-{
-	char	**filled_map;
-	int		i;
-
-	i = init;
-	filled_map = NULL;
-	filled_map = (char **)malloc(sizeof(char *) * ((end - init) + 1));
-	ft_memset(filled_map, 32, (size_t)(end - init) + 1);
-	if (!filled_map)
-		return (NULL);
-	while (i < end)
-	{
-		filled_map[i - init] = (char *)malloc(sizeof(char ) * (width + 1));
-		ft_memset(filled_map[i - init], 32, (size_t)(width + 1));
-		if (fill_aux(filled_map, i, map, width) == 1)
-			filled_map[i - init][width] = '\0';
-		i++;
-	}
-	filled_map[(end - init)] = NULL;
-	return (filled_map);
 }
 
 t_info	add_paths(char **map, t_info *aux, int init, int end)
@@ -183,24 +108,23 @@ t_info	add_paths(char **map, t_info *aux, int init, int end)
 	return (*aux);
 }
 
-void	check_files(t_info aux, int fd)
+void	check_files(t_info aux, int fd)	//checkear esto
 {
 	fd = open(aux.n, O_RDONLY);
 	if (fd < 0)
-		return;		//habra que comprobar que si no existen, salga
+		return ;
 	close(fd);
 	fd = open(aux.s, O_RDONLY);
 	if (fd < 0)
-		return;
+		return ;
 	close(fd);
 	fd = open(aux.e, O_RDONLY);
 	if (fd < 0)
-		printf("error\n");
-		return;
+		return ;
 	close(fd);
 	fd = open(aux.w, O_RDONLY);
 	if (fd < 0)
-		return;
+		return ;
 	close(fd);
 }
 

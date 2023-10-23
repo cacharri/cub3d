@@ -6,13 +6,13 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/17 20:37:12 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:00:28 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_one(char *map, int ini, int end)	// checkea entre filas para ver que sean correctas
+void	check_one(char *map, int ini, int end)
 {
 	while (map[ini] && ini <= end) 
 	{
@@ -25,7 +25,7 @@ void	check_one(char *map, int ini, int end)	// checkea entre filas para ver que 
 	}
 }
 
-void	check_sides(char *map, int ini, int end)		// checkea las filas para ver que haya numeros correctos
+void	check_sides(char *map, int ini, int end)
 {
 	if (map[ini - 1] && ft_strchr("NSEW", map[ini -1]))
 	{
@@ -100,7 +100,7 @@ void	check_map(char **map, int i, int j, int cord)
 	}
 	if (cord != 1)
 	{
-		perror("TOO MANY COORDINATES");
+		perror("BAD COORDINATES");
 		exit(1);
 	}
 }
@@ -140,16 +140,13 @@ char	**extract_input(char **info, int size, int i, char *line)
 	close(fd);
 	return (map);
 }
-char	**get_map_info(char **info)
+
+char	**get_map_info(char **info, int size)
 {
 	int fd;
 	char *line;
-	int size;
-	int	i;
 	char **map;
-	
-	size = 0;
-	i = 0;
+
 	map = NULL;
 	fd = open(info[1], O_RDONLY);
 	if (fd < 0)
@@ -170,5 +167,5 @@ char	**get_map_info(char **info)
 	}
 	map = extract_input(info, size, 0, line); 
 	free(line);
-	return(map);
+	return (map);
 }

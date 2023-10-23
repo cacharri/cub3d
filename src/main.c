@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/17 20:38:42 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/23 18:03:46 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int main(int argc, char **argv)
     	printf("Usage: %s <map_file.cub>\n", argv[0]);
    		return (1);
 	}
-	//ft_bzero(&map_data, sizeof(t_info)); why
-	//ft_bzero(&init, sizeof(t_game)); why
-	map_data = parse_map(get_map_info(argv)); //add .cub check,add argc == 2,  try break it
+	ft_bzero(&map_data, sizeof(t_info));
+	ft_bzero(&init, sizeof(t_game));
+	map_data = parse_map(get_map_info(argv, 0));
 	check_map(map_data.map, 0, 0, 0);
-	
-	init_cub(&init);
+	printf("esto es RGB: %d,%d, %d\n", map_data.floor.r, map_data.floor.g, map_data.floor.b);
+	//init_cub(&init);
 	return (0);
 }
