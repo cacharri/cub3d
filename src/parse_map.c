@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/23 18:31:16 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:02:37 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 	aux = NULL;
 	j = 0;
 	in = (*needle);
-	while (str && str[++(*needle)] != '\0')
+	while (str && str[(*needle)++] != '\0')
 	{
-		while (str[(*needle)++] == ' ')
+		while (str[(*needle)] == ' ')
+		{
+			(*needle)++;
 			in = (*needle);
+		}
 		if (str[(*needle)] == delimiter)
 		{
 			j = (*needle);
 			break ;
 		}	
 	}
-	aux = ft_substr(str, in, j - 1);
+	aux = ft_substr(str, in, j - in);
 	return (aux);
 }
 
@@ -56,27 +59,31 @@ int is_valid_rgb(const char *str)
     return (commas == 2);
 }
 
-void	parse_rgb(char *map, t_rgb *color)
+void	parse_rgb(char *map, int *x)
 {
 	int		i;
-
-	i = -1;
+	int		r;
+	int		g;
+	int		b;
+	
+	i = 0;
 	if (!is_valid_rgb(map))
 	{
         printf("Error: El formato RGB en la línea no es válido.\n");
         exit(1);
     }
-	ft_memset(color, '0', sizeof(t_rgb));
-	color->r = ft_atoi(ft_strtrok(map, ',', &i));
-	color->g = ft_atoi(ft_strtrok(map, ',', &i));
-	color->b = ft_atoi(&map[(i + 1)]);
-	if (color->r < 0 || color->r > 255
-		|| color->g < 0 || color->g > 255
-		|| color->b < 0 || color->b > 255)
+	r = ft_atoi(ft_strtrok(map, ',', &i));
+	i++;
+	g = ft_atoi(ft_strtrok(map, ',', &i));
+	b = ft_atoi(&map[(i + 1)]);
+	if (r < 0 || r > 255
+		|| g < 0 || g > 255
+		|| b < 0 || b > 255)
 	{
 		printf("Colors of RGB are not valid\n");
 		exit(1);
 	}
+	(*x) = 0 << 24 | r << 16 | g << 8 | b;
 }
 
 t_info	add_paths(char **map, t_info *aux, int init, int end)

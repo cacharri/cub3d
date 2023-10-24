@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/18 17:17:05 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:03:32 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,25 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
+typedef struct s_img
+{
+	void	*img;
+	int		width;
+	int		height;
+	char	*addr;
+	int		bpp;
+	int 	len;
+	int		endian;
+}				t_img;
+
+typedef struct s_texture
+{
+	t_img n;
+	t_img s;
+	t_img e;
+	t_img w;
+}				t_texture;
+
 typedef struct s_rbg
 {
 	int		r;
@@ -55,8 +74,8 @@ typedef struct s_info
 	char	*s;
 	char	*w;
 	char	*e;
-	t_rgb	floor;
-	t_rgb	ceiling;
+	int		floor;
+	int		ceiling; 
 	char	**map;
 }				t_info;
 
@@ -66,13 +85,15 @@ typedef struct s_game
 	void	*win;
 	int		x_size;
 	int		y_size;
+	t_img	bg;
+	t_texture tex;
 	//float	wall_h;
 }				t_game;
 
 t_info	parse_map(char **map);
 char	**get_map_info(char **info, int size);
 void	check_map(char **map, int i, int j, int cord);
-void	init_cub(t_game *init);
+void	init_cub(t_game *init, t_info *data);
 int		check_extension(char *argv, char *ext);
 int		find_start_map(char **map);
 int		find_end_map(char **map);
