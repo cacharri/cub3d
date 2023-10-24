@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/24 17:03:32 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:05:27 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ typedef struct s_texture
 	t_img e;
 	t_img w;
 }				t_texture;
-
-typedef struct s_rbg
-{
-	int		r;
-	int		g;
-	int		b;
-}				t_rgb;
 
 typedef struct s_info
 {

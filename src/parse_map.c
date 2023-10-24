@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/24 17:02:37 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:17:03 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,7 @@ t_info	parse_map(char	**map)
 	aux.e = NULL;
 	aux.w = NULL;
 	aux.map = NULL;
-	fd = 0;
-	ft_memset(&aux.floor, 0, sizeof(t_rgb));
-	ft_memset(&aux.ceiling, 0, sizeof(t_rgb));
+	fd = 0;	
 	aux = add_paths(map, &aux, 0, 0);
 	if ((check_extension(aux.n, ".xpm") || check_extension(aux.e, ".xpm")
 			|| check_extension(aux.w, ".xpm")
