@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/24 17:17:03 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:58:55 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,19 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 	return (aux);
 }
 
-int is_valid_rgb(const char *str) 
-{
-    int commas = 0;
-	int i;
-
-	i = 0;
-	commas = 0;
-    while (str[++i] != '\0')
-	{
-        if (str[i] == ',')
-		{
-            commas++;
-            if (commas > 2)
-                return 0;
-        }
-		else if (!ft_isdigit(str[i]) && str[i] != '\t' && str[i] != 32)
-            return 0;
-	}
-    return (commas == 2);
-}
-
 void	parse_rgb(char *map, int *x)
 {
 	int		i;
 	int		r;
 	int		g;
 	int		b;
-	
+
 	i = 0;
 	if (!is_valid_rgb(map))
 	{
-        printf("Error: El formato RGB en la línea no es válido.\n");
-        exit(1);
-    }
+		printf("Error: El formato RGB en la línea no es válido.\n");
+		exit(1);
+	}
 	r = ft_atoi(ft_strtrok(map, ',', &i));
 	i++;
 	g = ft_atoi(ft_strtrok(map, ',', &i));
@@ -115,7 +94,7 @@ t_info	add_paths(char **map, t_info *aux, int init, int end)
 	return (*aux);
 }
 
-void	check_files(t_info aux, int fd)	//checkear esto
+void	check_files(t_info aux, int fd)
 {
 	fd = open(aux.n, O_RDONLY);
 	if (fd < 0)
@@ -145,7 +124,7 @@ t_info	parse_map(char	**map)
 	aux.e = NULL;
 	aux.w = NULL;
 	aux.map = NULL;
-	fd = 0;	
+	fd = 0;
 	aux = add_paths(map, &aux, 0, 0);
 	if ((check_extension(aux.n, ".xpm") || check_extension(aux.e, ".xpm")
 			|| check_extension(aux.w, ".xpm")

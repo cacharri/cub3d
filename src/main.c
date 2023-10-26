@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/24 17:03:51 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/26 17:54:27 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ int	check_extension(char *argv, char *ext)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_info	map_data;
 	t_game	init;
-	
+
 	if (argc != 2 || check_extension(argv[1], ".cub") == 1)
 	{
-    	printf("Usage: %s <map_file.cub>\n", argv[0]);
-   		return (1);
+		printf("Usage: %s <map_file.cub>\n", argv[0]);
+		return (1);
 	}
 	ft_bzero(&map_data, sizeof(t_info));
 	ft_bzero(&init, sizeof(t_game));
 	map_data = parse_map(get_map_info(argv, 0));
-	check_map(map_data.map, 0, 0, 0);
+	check_map(map_data.map, 0, 0);
 	init_cub(&init, &map_data);
 	return (0);
 }
