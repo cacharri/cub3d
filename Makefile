@@ -15,7 +15,7 @@ CC = gcc
 RM = rm -f
 MAKE = make
 DEBUG = -g3 -fsanitize=address
-CFLAGS = -D BUFFER_SIZE=1 -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -D BUFFER_SIZE=1 -g3 -fsanitize=address -Wall -Werror -Wextra
 # Properties for compiling in MacOS
 MLX_LINK = -lmlx -framework OpenGL -framework AppKit
 

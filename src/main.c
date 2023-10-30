@@ -12,6 +12,21 @@
 
 #include "cub3d.h"
 
+void	free_info(t_info *info)
+{
+	if (info->n)
+		free(info->n);
+	if (info->s)
+		free(info->s);
+	if (info->e)
+		free(info->e);
+	if (info->w)
+		free(info->w);
+	if (info->map)
+		free(info->map);
+
+
+}
 int	check_extension(char *argv, char *ext)
 {
 	int		len;

@@ -59,6 +59,8 @@ typedef struct s_texture
 	t_img	s;
 	t_img	e;
 	t_img	w;
+	int		floor;
+	int		ceiling;
 }				t_texture;
 
 typedef struct s_check
@@ -87,8 +89,11 @@ typedef struct s_game
 	void		*win;
 	int			x_size;
 	int			y_size;
+	int			floor;
+	int			ceiling;
 	t_img		bg;
 	t_texture	tex;
+	char		**map;
 	//float		wall_h;
 }				t_game;
 
@@ -106,5 +111,6 @@ void	check_one(char *map, int ini, int end);
 void	check_sides(char *map, int ini, int end);
 void	aux_check_map(char map, int *cord, int i, int fin);
 int		is_valid_rgb(const char *str);
+void	free_info(t_info *info);
 
 #endif
