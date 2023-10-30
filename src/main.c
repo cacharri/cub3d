@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/26 17:54:27 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:32:54 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_info(t_info *info)
 		free(info->w);
 	if (info->map)
 		free(info->map);
-
-
 }
 int	check_extension(char *argv, char *ext)
 {
@@ -59,5 +57,6 @@ int	main(int argc, char **argv)
 	map_data = parse_map(get_map_info(argv, 0));
 	check_map(map_data.map, 0, 0);
 	init_cub(&init, &map_data);
+	
 	return (0);
 }

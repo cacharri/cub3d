@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/24 17:34:28 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:20:04 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,16 @@ static void	load_img(t_game *x, t_info *data)
 			&x->bg.len, &x->bg.endian);
 
 }
+
+int	close_game(int keycode, t_game *game)
+{
+	(void)keycode;
+	mlx_destroy_window(game->ptr, game->win);
+	exit(0);
+	return (0);
+}
+
+
 void	init_cub(t_game *init, t_info *data)
 {	
 	init->ptr = mlx_init();
@@ -88,5 +98,7 @@ void	init_cub(t_game *init, t_info *data)
 	init->ceiling = data->ceiling;
 	free_info(data);
 	mlx_loop_hook(init->ptr, game, init);
+	mlx_hook(init->win, 17, 1L << 0, close_game, init);
+	mlx_hook(init->win, 2, 1L << 0, close_game, init);
 	mlx_loop(init->ptr);
 }

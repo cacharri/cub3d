@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/26 17:57:31 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:00:55 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 # define KEY_A 0
 # define KEY_D 2
 # define KEY_ESC 53
+
+# define TRANSPARENT 0x00000000
+# define WALL_COLOR 0xFF0000
+
 
 typedef struct s_img
 {
