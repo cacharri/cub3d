@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/30 19:32:54 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:30:13 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int	main(int argc, char **argv)
 	map_data = parse_map(get_map_info(argv, 0));
 	check_map(map_data.map, 0, 0);
 	init_cub(&init, &map_data);
-	
 	return (0);
 }

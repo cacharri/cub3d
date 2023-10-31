@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/30 20:20:04 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:47:33 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,11 @@ static void	load_img(t_game *x, t_info *data)
 
 int	close_game(int keycode, t_game *game)
 {
-	(void)keycode;
-	mlx_destroy_window(game->ptr, game->win);
-	exit(0);
+	if (keycode == 53)
+	{
+		mlx_destroy_window(game->ptr, game->win);
+		exit(0);
+	}
 	return (0);
 }
 
