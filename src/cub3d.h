@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/31 17:47:56 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/11/10 21:24:41 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # define CLOSE " 1"
 # define WIDTH 1080
 # define HEIGHT 720
+# define TILE_SIZE 20
+# define MINIMAP_WIDTH_PERCENTAGE 20
+# define MINIMAP_HEIGHT_PERCENTAGE 20
 
 # define DEGREES_E 0
 # define DEGREES_N 1.5708
@@ -86,6 +89,16 @@ typedef struct s_info
 	char	**map;
 }				t_info;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	float	plane_x;
+	float	plane_y;
+	int		mouse;
+}				t_player;
+
 typedef struct s_game
 {
 	void		*ptr;
@@ -96,6 +109,7 @@ typedef struct s_game
 	int			ceiling;
 	t_img		bg;
 	t_texture	tex;
+	t_player	player;
 	char		**map;
 	//float		wall_h;
 }				t_game;
