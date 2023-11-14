@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/11/10 22:32:30 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:28:10 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ void drawMiniMap(t_game *game)
 			{
 				// Punto rojo más grande
 				my_mlx_pixel_put(&game->bg, cellX, cellY, 0xFF0000);
-				my_mlx_pixel_put(&game->bg, cellX + 1, cellY, 0xFF0000);
-				my_mlx_pixel_put(&game->bg, cellX, cellY + 1, 0xFF0000);
-				my_mlx_pixel_put(&game->bg, cellX + 1, cellY + 1, 0xFF0000);
+			//	my_mlx_pixel_put(&game->bg, cellX + 1, cellY, 0xFF0000);
+			//	my_mlx_pixel_put(&game->bg, cellX, cellY + 1, 0xFF0000);
+			//	my_mlx_pixel_put(&game->bg, cellX + 1, cellY + 1, 0xFF0000);
 			}
 		}
 	}
@@ -187,9 +187,8 @@ void	find_pos(float *x, float *y, char **map)
 		{
 			if (ft_strchr("NSWE", map[i][j]))
 			{
-				printf("i:%d\nj:%d\n", i, j);
-				*x = (float)i;		// comprobar estos valores si son correctos
-				*y = (float)j;		//
+				*x = (float)i;
+				*y = (float)j;
 			}
 			j++;
 		}
