@@ -6,14 +6,14 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:37:30 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/09/29 16:43:03 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:08:18 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
-{	
+{
 	char	*dst;
 
 	if (!s1 || !s2)

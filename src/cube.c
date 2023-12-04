@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/11/14 18:28:10 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:14:09 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	game(t_game *game)
 	//check_movement(g);
 	draw_background(game->bg, game->ceiling, game->floor);
 	//raycast(game);
-	//drawMiniMap(game);
+	draw_mini_map(game);
 	//probably should make the minimap it's own thingy instead of using the game->bg thingy
 	mlx_put_image_to_window(game->ptr, game->win, game->bg.img, 0, 0); //this puts the entire thing on front since we are drawing on the fucking game.bg thing
-	return(0);	
+	return (0);
 }
 
 static void	load_img(t_game *x, t_info *data)
@@ -42,7 +42,6 @@ static void	load_img(t_game *x, t_info *data)
 			&x->tex.w.width, &x->tex.w.height);
 	x->tex.w.addr = mlx_get_data_addr(x->tex.w.img, &x->tex.w.bpp,
 			&x->tex.w.len, &x->tex.w.endian);
-
 	x->bg.width = WIDTH;
 	x->bg.height = HEIGHT;
 	x->bg.img = mlx_new_image(x->ptr, WIDTH, HEIGHT);
@@ -61,9 +60,10 @@ int	close_game(int keycode, t_game *game)
 }
 
 void	init_cub(t_game *init, t_info *data)
-{	
+{
 	init->y_size = find_end_map(data->map);
-	init->x_size = find_width_map(data->map, find_start_map(data->map), find_end_map(data->map));
+	init->x_size = find_width_map(data->map, find_start_map(data->map),
+			find_end_map(data->map));
 	find_pos(&init->player.y, &init->player.x, data->map);
 	init->ptr = mlx_init();
 	init->win = mlx_new_window(init->ptr, WIDTH, HEIGHT, "cub3d");
@@ -74,6 +74,6 @@ void	init_cub(t_game *init, t_info *data)
 	free_info(data);
 	mlx_loop_hook(init->ptr, game, init);
 	mlx_hook(init->win, 17, 1L << 0, close_game, init);
-	mlx_hook(init->win, 2, 1L << 0, close_game, init); //why two??
+	mlx_hook(init->win, 2, 1L << 0, close_game, init);
 	mlx_loop(init->ptr);
 }

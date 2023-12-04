@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabel-co <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:29:07 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/12/04 12:29:08 by dabel-co         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:12:14 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	draw_background(t_img bg, int ceiling, int floor)
 		x = 0;
 		while (x < WIDTH)
 		{
-			my_mlx_pixel_put(&bg, x, y, tex);
+		//	my_mlx_pixel_put(&bg, x, y, tex);
+			my_mlx_pixel_put(&bg, x, y, blend_colors(tex,
+					(((y * 255) / HEIGHT) << 16), ((y * 255) / HEIGHT)));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:47:13 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/30 15:48:46 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:08:09 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	aux_check_map(char map, int *cord, int i, int fin)
 	}
 }
 
- int	is_valid_rgb(const char *str)
+int	is_valid_rgb(const char *str)
 {
 	int	commas;
 	int	i;

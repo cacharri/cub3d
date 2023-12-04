@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/11/10 21:24:41 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:55:38 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,37 @@ typedef struct s_game
 	t_player	player;
 }				t_game;
 
+typedef struct s_blend
+{
+	int		r1;
+	int		g1;
+	int		b1;
+	int		r2;
+	int		g2;
+	int		b2;
+	int		blended_r;
+	int		blended_g;
+	int		blended_b;
+}				t_blend;
+
+typedef struct s_minap
+{
+	int		x;
+	int		y;
+	int		border_width;
+	int		mini_map_width;
+	int		mini_map_height;
+	int		mini_map_x;
+	int		mini_map_y;
+	int		cell_x;
+	int		cell_y;
+	long	bg_color;
+	int		game_x;
+	int		game_y;
+	float	scale_x;
+	float	scale_y;
+}				t_minap;
+
 t_info	parse_map(char **map);
 char	**get_map_info(char **info, int size);
 void	check_map(char **map, int i, int j);
@@ -137,9 +168,10 @@ void	check_sides(char *map, int ini, int end);
 void	aux_check_map(char map, int *cord, int i, int fin);
 int		is_valid_rgb(const char *str);
 void	free_info(t_info *info);
-void 	drawMiniMap(t_game *game);
+void	draw_mini_map(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, long color);
 void	draw_background(t_img bg, int ceiling, int floor);
 void	find_pos(float *x, float *y, char **map);
-void    raycasting(t_game *g);
+void	raycasting(t_game *g);
+long	blend_colors(long color1, long color2, int weight);
 #endif

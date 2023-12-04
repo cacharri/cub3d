@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabel-co <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:34:06 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/30 16:34:07 by dabel-co         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:07:48 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 void    raycasting(t_game *g)
-{
-    
+{   
 }

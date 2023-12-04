@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 13:36:15 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/31 17:30:13 by ialvarez         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:14:49 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_info(t_info *info)
 	if (info->map)
 		free(info->map);
 }
+
 int	check_extension(char *argv, char *ext)
 {
 	int		len;
