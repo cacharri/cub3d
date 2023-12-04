@@ -45,8 +45,8 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
-# define TRANSPARENT 0x00000000
-# define WALL_COLOR 0xFF0000
+# define TRANSPARENT 0x00000000 //?
+# define WALL_COLOR 0xFF0000 //?
 
 typedef struct s_img
 {
@@ -69,6 +69,14 @@ typedef struct s_texture
 	int		ceiling;
 }				t_texture;
 
+typedef struct s_bres
+{
+	float	x;
+	float	y;
+	float	end_x;
+	float	end_y;
+}	t_bres;		//Bresenham's line algorithm
+
 typedef struct s_check
 {
 	int	ini;
@@ -77,6 +85,16 @@ typedef struct s_check
 	int	fin;
 	int	cord;
 }				t_check;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	float	plane_x;
+	float	plane_y;
+	int		mouse;
+}				t_player;
 
 typedef struct s_info
 {
@@ -89,29 +107,19 @@ typedef struct s_info
 	char	**map;
 }				t_info;
 
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float	angle;
-	float	plane_x;
-	float	plane_y;
-	int		mouse;
-}				t_player;
-
 typedef struct s_game
 {
 	void		*ptr;
 	void		*win;
+	char		**map;
 	int			x_size;
 	int			y_size;
-	int			floor;
-	int			ceiling;
+	float		wall_h;
+	int			floor; //?
+	int			ceiling; //?
 	t_img		bg;
 	t_texture	tex;
 	t_player	player;
-	char		**map;
-	//float		wall_h;
 }				t_game;
 
 t_info	parse_map(char **map);
@@ -129,5 +137,9 @@ void	check_sides(char *map, int ini, int end);
 void	aux_check_map(char map, int *cord, int i, int fin);
 int		is_valid_rgb(const char *str);
 void	free_info(t_info *info);
-
+void 	drawMiniMap(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, long color);
+void	draw_background(t_img bg, int ceiling, int floor);
+void	find_pos(float *x, float *y, char **map);
+void    raycasting(t_game *g);
 #endif

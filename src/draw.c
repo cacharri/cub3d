@@ -1,18 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dabel-co <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 16:34:06 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/10/30 16:34:07 by dabel-co         ###   ########.fr       */
+/*   Created: 2023/12/04 12:29:07 by dabel-co          #+#    #+#             */
+/*   Updated: 2023/12/04 12:29:08 by dabel-co         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    raycasting(t_game *g)
+void	my_mlx_pixel_put(t_img *img, int x, int y, long color)
 {
-    
+	char	*dst;
+
+	dst = img->addr + (y * img->len + x
+			* (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	draw_background(t_img bg, int ceiling, int floor)
+{
+	int	x;
+	int	y;
+	int	tex;
+
+	y = 0;
+	tex = ceiling;
+	while (y < HEIGHT)
+	{
+		if (y == HEIGHT / 2)
+			tex = floor;
+		x = 0;
+		while (x < WIDTH)
+		{
+			my_mlx_pixel_put(&bg, x, y, tex);
+			x++;
+		}
+		y++;
+	}
 }

@@ -32,7 +32,7 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 		{
 			j = (*needle);
 			break ;
-		}	
+		}
 	}
 	aux = ft_substr(str, in, j - in);
 	return (aux);
