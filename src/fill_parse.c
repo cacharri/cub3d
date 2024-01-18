@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:37:28 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/10/26 15:21:03 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:25:40 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	find_end_map(char **map)
 	{
 		if (ft_strchr(map[i], '1'))
 			break ;
+		else if (i == 0)
+			return (i);
 		i--;
 	}
 	i++;

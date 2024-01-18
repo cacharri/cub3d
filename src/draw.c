@@ -6,19 +6,77 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:29:07 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/12/04 19:12:14 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:39:45 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, long color)
+char	*ft_strtrok(char *str, char delimiter, int *needle)
+{
+	int		j;
+	int		in;
+	char	*aux;
+
+	aux = NULL;
+	j = 0;
+	in = (*needle);
+	while (str && str[(*needle)++] != '\0')
+	{
+		while (str[(*needle)] == ' ')
+		{
+			(*needle)++;
+			in = (*needle);
+		}
+		if (str[(*needle)] == delimiter)
+		{
+			j = (*needle);
+			break ;
+		}
+	}
+	aux = ft_substr(str, in, j - in);
+	return (aux);
+}
+
+int	my_mlx_pixel_get(t_img *img, int x, int y)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->len + x
-			* (img->bpp / 8));
-	*(unsigned int *)dst = color;
+	dst = img->addr + (y * img->len + x * (img->bpp / 8));
+	return (*(unsigned int *)dst);
+}
+
+void	draw_line(t_img img, t_bres bres, int texture)
+{
+	float	step_x;
+	float	step_y;
+	float	dist;
+	int		i;
+
+	dist = sqrt(pow(bres.x - bres.end_x, 2)
+			+ pow(bres.y - bres.end_y, 2));
+	step_x = (bres.end_x - bres.x) / dist;
+	step_y = (bres.end_y - bres.y) / dist;
+	i = 0;
+	while (i < dist)
+	{
+		my_mlx_pixel_put(&img, (bres.x + step_x * i)
+			+ 0, (bres.y + step_y * i)
+			+ 0, texture);
+		i++;
+	}
+}
+
+void	my_mlx_pixel_put(t_img *img, int x, int y, long texture)
+{
+	char	*dst;
+
+	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
+	{
+		dst = img->addr + (y * img->len
+				+ x * (img->bpp / 8));
+		*(unsigned int *)dst = texture;
+	}
 }
 
 void	draw_background(t_img bg, int ceiling, int floor)
@@ -36,9 +94,7 @@ void	draw_background(t_img bg, int ceiling, int floor)
 		x = 0;
 		while (x < WIDTH)
 		{
-		//	my_mlx_pixel_put(&bg, x, y, tex);
-			my_mlx_pixel_put(&bg, x, y, blend_colors(tex,
-					(((y * 255) / HEIGHT) << 16), ((y * 255) / HEIGHT)));
+			my_mlx_pixel_put(&bg, x, y, tex);
 			x++;
 		}
 		y++;

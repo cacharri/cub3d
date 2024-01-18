@@ -6,62 +6,63 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:07:23 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/11/09 19:38:32 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:24:12 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	aux_check(t_check *c, int i, char **map, int *j)
+static int	aux_check(t_check *c, int i, char **map, int *j)
 {
-	if (map[i][0] == '0')
-	{
-		perror("MAP IS NOT CLOSED");
-		exit(1);
-	}
+	if (!ft_strchr("1 ", map[i][0]))
+		return (4);
 	if (map[i][*j] == '0' && i != 0)
 	{
 		c->ini = *j;
 		while (map[i][*j] == '0' || (ft_strchr("NSEW", map[i][*j])
 			&& map[i][*j + 1] == '0'))
-		{
-			if (ft_strchr("NSEW", map[i][*j]))
-				c->cord++;
-			c->flag = c->ini;
 			(*j)++;
-		}
 		c->end = *j - 1;
+		if (check_sides(map[i], c->ini, c->end) == 3
+			|| check_one(map[i - 1], c->ini, c->end) == 3
+			|| check_one(map[i + 1], c->ini, c->end) == 3)
+			return (3);
 	}
-	else if (c->flag != 0)
+	if (ft_strchr("NSEW", map[i][*j]))
 	{
-		check_sides(map[i], c->ini, c->end);
-		check_one(map[i - 1], c->ini, c->end);
-		c->flag = 0;
+		if (check_one(map[i - 1], *j, *j) == 3
+			|| check_one(map[i + 1], *j, *j) == 3)
+			return (3);
 	}
+	return (0);
 }
 
-void	check_map(char **map, int i, int j)
+int	check_map(char **map, int i, int j)
 {
 	t_check	c;
+	int		err;
 
+	err = 0;
 	ft_bzero(&c, sizeof(t_check));
 	c.fin = find_end_map(map) - 1;
-	while (map && map[i])
+	err = check_coord(map, &c, c.fin);
+	if (c.cord != 1)
+		return (1);
+	if (err != 0)
+		return (err);
+	while (map && map[i] != NULL)
 	{
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			aux_check_map(map[i][j], &c.cord, i, c.fin);
-			aux_check(&c, i, map, &j);
+			err = aux_check(&c, i, map, &j);
+			if (err != 0)
+				return (err);
 			j++;
 		}
 		i++;
 	}
-	if (c.cord != 1)
-	{
-		perror("BAD COORDINATES");
-		exit(1);
-	}
+	return (0);
 }
 
 static void	aux_input(char **map, int *i, int fd, char **line)
@@ -114,21 +115,13 @@ char	**get_map_info(char **info, int size)
 	map = NULL;
 	fd = open(info[1], O_RDONLY);
 	if (fd < 0)
-	{
-		perror("Error opening file");
 		return (NULL);
-	}
 	while (get_next_line(fd, &line))
 	{
 		size++;
 		free(line);
 	}
 	close(fd);
-	if (size == 0)
-	{
-		printf("Empty map\n");
-		return (NULL);
-	}
 	map = extract_input(info, size, 0, line);
 	free(line);
 	return (map);

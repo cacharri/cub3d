@@ -6,13 +6,26 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:10:05 by dabel-co          #+#    #+#             */
-/*   Updated: 2023/12/04 18:46:41 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:24:38 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	find_pos(float *x, float *y, char **map)
+float	set_angles(char c)
+{
+	if (c == 'N')
+		return (DEGREES_0);
+	else if (c == 'E')
+		return (DEGREES_90);
+	else if (c == 'S')
+		return (DEGREES_180);
+	else if (c == 'O')
+		return (DEGREES_270);
+	return (0);
+}
+
+float	find_pos(float *x, float *y, char **map)
 {
 	int		i;
 	int		j;
@@ -27,51 +40,48 @@ void	find_pos(float *x, float *y, char **map)
 			{
 				*x = (float)i;
 				*y = (float)j;
+				return (set_angles(map[i][j]));
 			}
 			j++;
 		}
 		i++;
 	}
+	return (0);
 }
 
-long	blend_colors(long color1, long color2, int weight)
+void	aux_minimap(t_minap **c)
 {
-	t_blend		c;
-
-	ft_bzero(&c, sizeof(t_blend));
-	c.r1 = (color1 >> 16) & 0xFF;
-	c.g1 = (color1 >> 8) & 0xFF;
-	c.b1 = color1 & 0xFF;
-	c.r2 = (color2 >> 16) & 0xFF;
-	c.g2 = (color2 >> 8) & 0xFF;
-	c.b2 = color2 & 0xFF;
-	c.blended_r = (c.r1 * (255 - weight) + c.r2 * weight) / 255;
-	c.blended_g = (c.g1 * (255 - weight) + c.g2 * weight) / 255;
-	c.blended_b = (c.b1 * (255 - weight) + c.b2 * weight) / 255;
-	return ((c.blended_r << 16) | (c.blended_g << 8) | c.blended_b);
+	(*c)->cell_y = (*c)->mi_map_y + (*c)->y;
+	(*c)->cell_x = (*c)->mi_map_x + (*c)->x;
+	(*c)->bg_color = 0xFFFFFF;
+	(*c)->game_x = (int)((*c)->x * (*c)->scale_x);
+	(*c)->game_y = (int)((*c)->y * (*c)->scale_y);
 }
 
 void	color_minimap(t_minap *c, t_game *game)
 {
-	while (++c->x < c->mini_map_width)
+	c->pl_mi_map_x = game->player.x / c->scale_x;
+	c->pl_mi_map_y = (game->player.y / c->scale_y) + 4;
+	c->i = -2;
+	while (++c->x < c->mi_map_width)
 	{
-		c->cell_x = c->mini_map_x + c->x;
-		c->cell_y = c->mini_map_y + c->y;
-		c->bg_color = 0xFFFFFF;
-		c->game_x = (int)(c->x * c->scale_x);
-		c->game_y = (int)(c->y * c->scale_y);
+		aux_minimap(&c);
 		if (game->map[c->game_y][c->game_x] == '1')
 			c->bg_color = 0x0000FF;
-		else if (game->map[c->game_y][c->game_x] == '0')
+		else if (game->map[c->game_y][c->game_x] == '0'
+			|| ft_strchr("NSEW", game->map[c->game_y][c->game_x]))
 			c->bg_color = 0xFFFF00;
-		if (c->x < c->border_width
-			|| c->x >= c->mini_map_width - c->border_width
-			|| c->y < c->border_width
-			|| c->y >= c->mini_map_height - c->border_width)
+		if (c->x < c->bor_width || c->x >= c->mi_map_width - c->bor_width
+			|| c->y < c->bor_width || c->y >= c->mi_map_height - c->bor_width)
 			c->bg_color = 0x000000;
 		my_mlx_pixel_put(&game->bg, c->cell_x, c->cell_y, c->bg_color);
-		if (game->player.x == c->game_x && game->player.y == c->game_y)
-			my_mlx_pixel_put(&game->bg, c->cell_x, c->cell_y, 0xFF0000);
+	}
+	while (c->i++ <= 2)
+	{
+		c->j = -2;
+		while (c->j++ <= 2)
+			my_mlx_pixel_put(&game->bg, c->mi_map_x + c->pl_mi_map_x
+				+ c->i, c->mi_map_y + c->pl_mi_map_y + c->j, 0xFF0000);
 	}
 }
 
@@ -82,14 +92,14 @@ void	draw_mini_map(t_game *game)
 	ft_bzero(&c, sizeof(t_minap));
 	c.x = 0;
 	c.y = -1;
-	c.border_width = 2;
-	c.mini_map_width = (WIDTH * MINIMAP_WIDTH_PERCENTAGE) / 100;
-	c.mini_map_height = (HEIGHT * MINIMAP_HEIGHT_PERCENTAGE) / 100;
-	c.scale_x = (float)game->x_size / c.mini_map_width;
-	c.scale_y = (float)game->y_size / c.mini_map_height;
-	c.mini_map_x = 10;
-	c.mini_map_y = HEIGHT - c.mini_map_height - 10;
-	while (++c.y < c.mini_map_height)
+	c.bor_width = 2;
+	c.mi_map_width = (WIDTH * MINIMAP_WIDTH_PERCENTAGE) / 100;
+	c.mi_map_height = (HEIGHT * MINIMAP_HEIGHT_PERCENTAGE) / 100;
+	c.scale_x = (float)game->x_size / c.mi_map_width;
+	c.scale_y = (float)game->y_size / c.mi_map_height;
+	c.mi_map_x = 10;
+	c.mi_map_y = HEIGHT - c.mi_map_height - 10;
+	while (++c.y < c.mi_map_height)
 	{
 		c.x = -1;
 		color_minimap(&c, game);

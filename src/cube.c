@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/12/04 19:14:09 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:39:18 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int	game(t_game *game)
 {
 	mlx_clear_window(game->ptr, game->win);
-	//check_movement(g);
+	check_movement(game);
 	draw_background(game->bg, game->ceiling, game->floor);
-	//raycast(game);
+	raycasting(game);
 	draw_mini_map(game);
-	//probably should make the minimap it's own thingy instead of using the game->bg thingy
-	mlx_put_image_to_window(game->ptr, game->win, game->bg.img, 0, 0); //this puts the entire thing on front since we are drawing on the fucking game.bg thing
+	mlx_put_image_to_window(game->ptr, game->win, game->bg.img, 0, 0);
 	return (0);
 }
 
@@ -49,13 +48,10 @@ static void	load_img(t_game *x, t_info *data)
 			&x->bg.len, &x->bg.endian);
 }
 
-int	close_game(int keycode, t_game *game)
+int	close_game(t_game *game)
 {
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(game->ptr, game->win);
-		exit(0);
-	}
+	mlx_destroy_window(game->ptr, game->win);
+	exit(0);
 	return (0);
 }
 
@@ -64,7 +60,7 @@ void	init_cub(t_game *init, t_info *data)
 	init->y_size = find_end_map(data->map);
 	init->x_size = find_width_map(data->map, find_start_map(data->map),
 			find_end_map(data->map));
-	find_pos(&init->player.y, &init->player.x, data->map);
+	init->player.angle = find_pos(&init->player.y, &init->player.x, data->map);
 	init->ptr = mlx_init();
 	init->win = mlx_new_window(init->ptr, WIDTH, HEIGHT, "cub3d");
 	load_img(init, data);
@@ -74,6 +70,8 @@ void	init_cub(t_game *init, t_info *data)
 	free_info(data);
 	mlx_loop_hook(init->ptr, game, init);
 	mlx_hook(init->win, 17, 1L << 0, close_game, init);
-	mlx_hook(init->win, 2, 1L << 0, close_game, init);
+	mlx_hook(init->win, 2, 1L << 0, key_pressed, init);
+	mlx_hook(init->win, 3, 1L << 1, key_released, init);
+	mlx_hook(init->win, 6, 1L << 6, mouse_input, init);
 	mlx_loop(init->ptr);
 }

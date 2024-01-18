@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/12/04 17:55:38 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:18:15 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,17 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
-# define TRANSPARENT 0x00000000 //?
-# define WALL_COLOR 0xFF0000 //?
+# define TRANSPARENT 0x00000000
+# define WALL_COLOR 0xFF0000
+# define FOV 1.0472
+# define HFOV 0.523599
+# define DEGREES_0 0
+# define DEGREES_90 1.5708
+# define DEGREES_180 3.14159
+# define DEGREES_270 4.71239
+# define DEGREES_360 6.28319
+# define PLAYER_SPEED 0.14
+# define PLAYER_ROTATE 0.10
 
 typedef struct s_img
 {
@@ -69,13 +78,19 @@ typedef struct s_texture
 	int		ceiling;
 }				t_texture;
 
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
+
 typedef struct s_bres
 {
 	float	x;
 	float	y;
 	float	end_x;
 	float	end_y;
-}	t_bres;		//Bresenham's line algorithm
+}	t_bres;
 
 typedef struct s_check
 {
@@ -86,14 +101,25 @@ typedef struct s_check
 	int	cord;
 }				t_check;
 
+typedef struct s_keys
+{
+	int		w;
+	int		a;
+	int		s;
+	int		d;
+	int		left;
+	int		right;
+}	t_keys;
+
 typedef struct s_player
 {
 	float	x;
 	float	y;
 	float	angle;
-	float	plane_x;
-	float	plane_y;
+	float	step_x;
+	float	step_y;
 	int		mouse;
+	t_keys	key;
 }				t_player;
 
 typedef struct s_info
@@ -105,6 +131,7 @@ typedef struct s_info
 	int		floor;
 	int		ceiling;
 	char	**map;
+	int		err;
 }				t_info;
 
 typedef struct s_game
@@ -115,8 +142,10 @@ typedef struct s_game
 	int			x_size;
 	int			y_size;
 	float		wall_h;
-	int			floor; //?
-	int			ceiling; //?
+	int			floor;
+	int			ceiling;
+	float		pl_minimap_y;
+	float		pl_minimap_x;
 	t_img		bg;
 	t_texture	tex;
 	t_player	player;
@@ -139,11 +168,11 @@ typedef struct s_minap
 {
 	int		x;
 	int		y;
-	int		border_width;
-	int		mini_map_width;
-	int		mini_map_height;
-	int		mini_map_x;
-	int		mini_map_y;
+	int		bor_width;
+	int		mi_map_width;
+	int		mi_map_height;
+	int		mi_map_x;
+	int		mi_map_y;
 	int		cell_x;
 	int		cell_y;
 	long	bg_color;
@@ -151,11 +180,15 @@ typedef struct s_minap
 	int		game_y;
 	float	scale_x;
 	float	scale_y;
+	int		pl_mi_map_x;
+	int		pl_mi_map_y;
+	int		i;
+	int		j;
 }				t_minap;
 
 t_info	parse_map(char **map);
 char	**get_map_info(char **info, int size);
-void	check_map(char **map, int i, int j);
+int		check_map(char **map, int i, int j);
 void	init_cub(t_game *init, t_info *data);
 int		check_extension(char *argv, char *ext);
 int		find_start_map(char **map);
@@ -163,15 +196,23 @@ int		find_end_map(char **map);
 int		find_width_map(char **map, int start, int end);
 int		fill_aux(char **filled_map, int i, char **map, int width);
 char	**fill_map(char **map, int init, int end, int width);
-void	check_one(char *map, int ini, int end);
-void	check_sides(char *map, int ini, int end);
-void	aux_check_map(char map, int *cord, int i, int fin);
+int		check_one(char *map, int ini, int end);
+int		check_sides(char *map, int ini, int end);
+int		check_coord(char **map, t_check *c, int fin);
+void	init_aux(t_info *aux);
 int		is_valid_rgb(const char *str);
 void	free_info(t_info *info);
 void	draw_mini_map(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, long color);
 void	draw_background(t_img bg, int ceiling, int floor);
-void	find_pos(float *x, float *y, char **map);
+float	find_pos(float *x, float *y, char **map);
 void	raycasting(t_game *g);
-long	blend_colors(long color1, long color2, int weight);
+void	check_movement(t_game *g);
+int		close_game(t_game *game);
+int		my_mlx_pixel_get(t_img *img, int x, int y);
+void	draw_line(t_img img, t_bres bres, int texture);
+int		key_pressed(int key, t_game *g);
+int		key_released(int key, t_game *g);
+int		mouse_input(int x, int y, t_game *g);
+char	*ft_strtrok(char *str, char delimiter, int *needle);
 #endif

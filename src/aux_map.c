@@ -6,65 +6,75 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 17:47:13 by ialvarez          #+#    #+#             */
-/*   Updated: 2023/12/04 17:08:09 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:30:21 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_one(char *map, int ini, int end)
+void	init_aux(t_info *aux)
+{
+	(*aux).n = NULL;
+	(*aux).s = NULL;
+	(*aux).e = NULL;
+	(*aux).w = NULL;
+	(*aux).map = NULL;
+	(*aux).floor = 257;
+	(*aux).ceiling = 257;
+	(*aux).err = 0;
+}
+
+int	check_coord(char **map, t_check *c, int fin)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map && map[++i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (ft_strchr("NSEW", map[i][j]))
+				(*c).cord++;
+			if (!ft_strchr("01NSEW ", map[i][j]))
+				return (5);
+			if (((i == 0 || i == fin) && ft_strchr("0NSWE", map[i][j])))
+				return (4);
+			j++;
+		}
+	}
+	return (0);
+}
+
+int	check_one(char *map, int ini, int end)
 {
 	while (map[ini] && ini <= end)
 	{
 		if (map[ini] == ' ')
-		{
-			perror("BAD NEIGHBORHOOD");
-			exit(1);
-		}
+			return (3);
 		ini++;
 	}
+	return (0);
 }
 
-void	check_sides(char *map, int ini, int end)
+int	check_sides(char *map, int ini, int end)
 {
 	if (map[ini - 1] && ft_strchr("NSEW", map[ini -1]))
 	{
 		if (map[ini - 2] && map[ini - 2] != '1')
-		{
-			perror("BAD NEIGHBORHOOD");
-			exit(1);
-		}
+			return (3);
 	}
-	else if (map[end + 1] && ft_strchr("NSEW", map[end + 1]))
+	if (map[end + 1] && ft_strchr("NSEW", map[end + 1]))
 	{
-		if (map[end + 2] && map[end + 2] != '1')
-		{
-			perror("BAD NEIGHBORHOOD");
-			exit(1);
-		}
+		if ((map[end + 2] && map[end + 2] != '1') || !map[end + 2])
+			return (3);
 	}
-	else if ((map[ini - 1] && map[ini - 1] != '1')
-		|| (map[end + 1] && map[end + 1] != '1'))
-	{
-		perror("BAD NEIGHBORHOOD");
-		exit(1);
-	}
-}
-
-void	aux_check_map(char map, int *cord, int i, int fin)
-{
-	if (ft_strchr("NSEW", map))
-		(*cord)++;
-	if (!ft_strchr("01NSEW ", map))
-	{
-		perror("CHARACTERS OF THE MAP NOT VALIDS");
-		exit(1);
-	}
-	else if (((i == 0 || i == fin) && ft_strchr("0NSWE", map)))
-	{
-		perror("MAP IS NOT CLOSED");
-		exit(1);
-	}
+	else if (((map[ini - 1] && map[ini - 1] != '1')
+			|| (map[end + 1] && map[end + 1] != '1'))
+		&& !ft_strchr("NSEW", map[ini - 1]))
+		return (3);
+	return (0);
 }
 
 int	is_valid_rgb(const char *str)
@@ -76,7 +86,7 @@ int	is_valid_rgb(const char *str)
 	commas = 0;
 	while (str[++i] != '\0')
 	{
-		if (str[i] == ',')
+		if (str[i] == ',' && str[i - 1] != ',')
 		{
 			commas++;
 			if (commas > 2)
