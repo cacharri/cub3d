@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:29:07 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/16 15:39:45 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:52:57 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	draw_line(t_img img, t_bres bres, int texture)
 	i = 0;
 	while (i < dist)
 	{
-		my_mlx_pixel_put(&img, (bres.x + step_x * i)
-			+ 0, (bres.y + step_y * i)
+		my_mlx_pixel_put(&img, (int)(bres.x + step_x * i)
+			+ 0, (int)(bres.y + step_y * i)
 			+ 0, texture);
 		i++;
 	}

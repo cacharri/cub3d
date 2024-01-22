@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:34:06 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/17 17:08:05 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:00:58 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_img	get_texture_img(t_game *g, t_vector ray, float ray_angle)
 void	draw_walls(t_game *g, t_img texture, t_vector ray, int ray_count)
 {
 	int		i;
-	float	j;
 	float	step_y;
 	int		color;
 	t_bres	draw;
@@ -61,13 +60,10 @@ void	draw_walls(t_game *g, t_img texture, t_vector ray, int ray_count)
 	draw.end_x = ray_count;
 	draw.y = (HEIGHT / 2) - g->wall_h;
 	i = 0;
-	while (i < texture.height)
+	while (i < texture.height && draw.y < HEIGHT)
 	{
 		color = get_texture_color(g, &texture, ray, i);
-		j = draw.y;
-		while (j < draw.y + step_y)
-			j++;
-		draw.end_y = j;
+		draw.end_y = draw.y + step_y;
 		draw_line(g->bg, draw, color);
 		draw.y += step_y;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/17 21:05:17 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:06:18 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	parse_rgb(char *map, int *x)
 	r = ft_atoi(ft_strtrok(map, ',', &i));
 	i++;
 	g = ft_atoi(ft_strtrok(map, ',', &i));
-	printf("aux:%d\n", g);
 	b = ft_atoi(&map[(i + 1)]);
 	if (r < 0 || r > 255
 		|| g < 0 || g > 255
@@ -61,9 +60,7 @@ t_info	add_paths(char **map, t_info *aux, int init, int end)
 
 	i = -1;
 	while (map && map[++i] != NULL)
-	{
 		add_paths_aux(map, aux, i);
-	}
 	if (aux->err == 1)
 		return (*aux);
 	init = find_start_map(map);
@@ -103,7 +100,6 @@ t_info	parse_map(char	**map)
 
 	init_aux(&aux);
 	fd = 0;
-	print_matrix(map);
 	aux = add_paths(map, &aux, 0, 0);
 	if (!aux.map || aux.ceiling == 257 || aux.floor == 257
 		|| map == NULL || aux.err == 1)

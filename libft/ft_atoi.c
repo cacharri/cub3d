@@ -6,23 +6,12 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 20:11:04 by ialvarez          #+#    #+#             */
-/*   Updated: 2024/01/17 21:04:58 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:32:08 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*void	err_atoi(const char *str) //actualizar
-{
-	if (str[i] == '\0')
-		return (257);
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			mas = -mas;
-		i++;
-	}
-}*/
 int	ft_atoi(const char *str)
 {
 	int	i;
