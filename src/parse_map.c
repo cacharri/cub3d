@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/22 18:06:18 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:01:08 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ static int	parse_rgb(char *map, int *x)
 	if (r < 0 || r > 255
 		|| g < 0 || g > 255
 		|| b < 0 || b > 255)
-	{
-		printf("Colors of RGB are not valid\n");
 		return (1);
-	}
 	(*x) = 0 << 24 | r << 16 | g << 8 | b;
 	return (0);
 }
