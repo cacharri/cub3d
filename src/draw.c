@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:29:07 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/22 17:52:57 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:52:35 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 	in = (*needle);
 	while (str && str[(*needle)++] != '\0')
 	{
-		while (str[(*needle)] == ' ')
+		while (str[(*needle)] == ' ' && ft_isdigit(str[*needle] + '0'))
 		{
 			(*needle)++;
 			in = (*needle);
@@ -34,7 +34,7 @@ char	*ft_strtrok(char *str, char delimiter, int *needle)
 			break ;
 		}
 	}
-	aux = ft_substr(str, in, j - in);
+	aux = skip_spaces(ft_substr(str, in, j - in));
 	return (aux);
 }
 

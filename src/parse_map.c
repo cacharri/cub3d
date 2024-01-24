@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:53:09 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/22 19:01:08 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:48:58 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ static int	parse_rgb(char *map, int *x)
 
 void	add_paths_aux(char **map, t_info *aux, int i)
 {
-	if (ft_strncmp(map[i], "NO", 2) == 0)
-		aux->n = ft_strtrim(map[i] + 2, " \t");
-	else if (ft_strncmp(map[i], "SO", 2) == 0)
-		aux->s = ft_strtrim(map[i] + 2, " \t");
-	else if (ft_strncmp(map[i], "EA", 2) == 0)
-		aux->e = ft_strtrim(map[i] + 2, " \t");
-	else if (ft_strncmp(map[i], "WE", 2) == 0)
-		aux->w = ft_strtrim(map[i] + 2, " \t");
-	else if (ft_strncmp(map[i], "F", 1) == 0)
-		aux->err = parse_rgb(map[i] + 1, &aux->floor);
-	else if (ft_strncmp(map[i], "C", 1) == 0)
-		aux->err = parse_rgb(map[i] + 1, &aux->ceiling);
+	if (ft_strncmp(skip_spaces(map[i]), "NO", 2) == 0)
+		aux->n = ft_strtrim(skip_spaces(map[i]) + 2, " \t");
+	else if (ft_strncmp(skip_spaces(map[i]), "SO", 2) == 0)
+		aux->s = ft_strtrim(skip_spaces(map[i]) + 2, " \t");
+	else if (ft_strncmp(skip_spaces(map[i]), "EA", 2) == 0)
+		aux->e = ft_strtrim(skip_spaces(map[i]) + 2, " \t");
+	else if (ft_strncmp(skip_spaces(map[i]), "WE", 2) == 0)
+		aux->w = ft_strtrim(skip_spaces(map[i]) + 2, " \t");
+	else if (ft_strncmp(skip_spaces(map[i]), "F", 1) == 0)
+		aux->err = parse_rgb(skip_spaces(map[i]) + 1, &aux->floor);
+	else if (ft_strncmp(skip_spaces(map[i]), "C", 1) == 0)
+		aux->err = parse_rgb(skip_spaces(map[i]) + 1, &aux->ceiling);
 }
 
 t_info	add_paths(char **map, t_info *aux, int init, int end)

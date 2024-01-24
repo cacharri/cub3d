@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:05:32 by vifernan          #+#    #+#             */
-/*   Updated: 2023/09/29 16:19:15 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:08:53 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*skip_spaces(char *str)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	aux = ft_substr(str, i, (int)ft_strlen(str) - i);
 	return (sk_front(aux));

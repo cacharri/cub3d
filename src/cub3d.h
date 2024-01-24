@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:53:49 by ialvarez          #+#    #+#             */
-/*   Updated: 2024/01/22 18:00:38 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:52:00 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,19 +150,6 @@ typedef struct s_game
 	t_texture	tex;
 	t_player	player;
 }				t_game;
-
-typedef struct s_blend
-{
-	int		r1;
-	int		g1;
-	int		b1;
-	int		r2;
-	int		g2;
-	int		b2;
-	int		blended_r;
-	int		blended_g;
-	int		blended_b;
-}				t_blend;
 
 typedef struct s_minap
 {

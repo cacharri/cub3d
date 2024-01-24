@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:37:28 by ialvarez          #+#    #+#             */
-/*   Updated: 2024/01/17 20:25:40 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:52:47 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	find_start_map(char **map)
 	i = -1;
 	while (map && map[++i] != NULL)
 	{
-		if (!ft_strchr("NSEWFC", map[i][0]) && ft_strchr(map[i], '1'))
+		if (!ft_strchr(map[i], 'N') && !ft_strchr(map[i], 'S')
+			&& !ft_strchr(map[i], 'E') && !ft_strchr(map[i], 'W')
+			&& !ft_strchr(map[i], 'F') && !ft_strchr(map[i], 'C')
+			&& ft_strchr(map[i], '1'))
 			break ;
 	}
 	return (i);
