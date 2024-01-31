@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 12:10:05 by dabel-co          #+#    #+#             */
-/*   Updated: 2024/01/17 20:24:38 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:02:02 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ float	set_angles(char c)
 		return (DEGREES_90);
 	else if (c == 'S')
 		return (DEGREES_180);
-	else if (c == 'O')
+	else if (c == 'W')
 		return (DEGREES_270);
 	return (0);
 }
