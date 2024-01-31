@@ -54,7 +54,7 @@
 # define DEGREES_180 3.14159
 # define DEGREES_270 4.71239
 # define DEGREES_360 6.28319
-# define PLAYER_SPEED 0.14
+# define PLAYER_SPEED 0.11
 # define PLAYER_ROTATE 0.10
 
 typedef struct s_img

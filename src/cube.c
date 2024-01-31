@@ -6,7 +6,7 @@
 /*   By: ialvarez <ialvarez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:12:17 by ialvarez          #+#    #+#             */
-/*   Updated: 2024/01/16 15:39:18 by ialvarez         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:37:47 by ialvarez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ static void	load_img(t_game *x, t_info *data)
 int	close_game(t_game *game)
 {
 	mlx_destroy_window(game->ptr, game->win);
+	free_matrix(game->map);
+	free(game->bg.addr);
 	exit(0);
-	return (0);
 }
 
 void	init_cub(t_game *init, t_info *data)
